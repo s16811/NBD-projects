@@ -1,0 +1,189 @@
+// zadanie 1.
+
+val dniTyg = List("Poniedziałek", "Wtorek", "Sroda", "Czwartek", "Piątek", "Sobota", "Niedziela")
+
+
+// zadanie 1a
+print(" zadanie 1a")
+for (dzien <- dniTyg) {
+  println(dzien)
+}
+
+// zadanie 1b
+println("zadanie 1b")
+
+for (dzien <- dniTyg.filter {_.startsWith("P")}) {
+  println(dzien)
+}
+
+// zadanie 1c
+println("zadanie 1c")
+dniTyg.foreach {
+  println
+}
+// zadanie 1d
+println("zadanie 1d")
+var i = 0
+while (i < dniTyg.length) {
+  println(dniTyg(i))
+  i += 1}
+
+// zadanie 1e
+println("zadanie 1e")
+def rek_list[A](arr : List[A]) : List[A] = arr match {
+  case Nil => Nil
+  case head::tail =>  List(head) ++ rek_list(tail)
+}
+println(rek_list(dniTyg))
+
+// zadanie 1f
+println("zadanie 1f")
+
+def reverse[A](arr : List[A]) : List[A] = arr match {
+  case Nil => Nil
+  case head::tail => reverse(tail) ++ List(head)
+}
+println(reverse(dniTyg))
+
+// zadanie 1g
+println("zadanie 1g")
+val fR = dniTyg.foldRight("")((a, b) => a + '\n' + b)
+val fL = dniTyg.foldLeft("")((b, a) => b + a + '\n')
+print("foldRight:\n" + fR)
+print("foldLeft:\n" + fL)
+
+// zadanie 1h
+println("zadanie 1h")
+val fL2 = dniTyg.filter(_.startsWith("P")).foldLeft("")((b, a) => b + a + '\n')
+val fR2 = dniTyg.filter(_.startsWith("P")).foldRight("")((a, b) => a + '\n' + b)
+print("foldLeft: dni zaczynające się na P:\n"+ fL2)
+print("foldRight: dnia zaczynające się na P:\n"+ fR2)
+
+// zadanie 2
+
+println("zadanie 2")
+
+val listProd = Map("TV SONY 55' 4K" -> 2600.0, "PS4 PRO" -> 2450.0, "FIFA 2018" -> 219.0, "KINO DOMOWE" -> 3600.0, "Fotel" -> 1500.0)
+val listProdADist = listProd.mapValues(_ * 0.9)
+println(" Ceny produktów z list : " + listProd)
+println(" Ceny produktów po zniżce 10 % " + listProdADist)
+
+// zadanie 3
+
+println("zadanie 3")
+
+def mix= (10.10,"text",2)
+
+println(mix)
+
+// zadanie 4
+
+println("zadanie 4")
+
+val mountains = Map("Mt.Fuji" -> 4900, "Mt.Everest" -> 8848, "Mt.test" -> 0 )
+def check(map: Map[String, Int], key: String): Option[Int] = {
+  if (map.contains(key))
+    Some(map(key))
+  else
+    None
+}
+
+val mt1 = check(mountains, "Mt.Fuji")
+val mt2 = check(mountains, "Mt.Everest")
+val mt3 = check(mountains, "Mt.test")
+println(mt1)
+println(mt2)
+println(mt3)
+
+// zadanie 5
+
+println("zadanie 5")
+
+
+def dniPracy(day: String ) : String = {
+  day match {
+    case "Poniedzialek" | "Wtorek" | "Sroda" | "Czwartek" | "Piatek" => return "Praca"
+    case "Sobota" | "Niedziela" => return "Weekend"
+    case _ => return "Nie ma takiego dnia"
+  }
+}
+
+println("Sroda to: " + (dniPracy("Sroda")));
+println("Niedziela to: " + (dniPracy("Niedziela")));
+println("psadsd to " + (dniPracy("psadsd")));
+
+// zadanie 6
+
+println("zadanie 6")
+  class kontoBankowe(val stan: Double) {
+  def this() = this(0)
+  def wplata(amount: Double) = new kontoBankowe(stan + amount)
+  def wyplata(amount: Double) = new kontoBankowe(stan - amount)
+}
+private val stanKonta = new kontoBankowe(100).wplata(100).wyplata(50)
+
+println("Aktualny stan konta(wersja 1) wynosi: " + stanKonta.stan)
+
+private val stanKonta2 = new kontoBankowe().wplata(1000).wyplata(500)
+
+println("Aktualny stan konta(wersja 2) wynosi: " + stanKonta2.stan)
+
+// zadanie 7
+
+println("zadanie 7")
+
+case class Student(imie: String, nazwisko: String)
+
+val Student1 = new Student("Alan", "Szpak")
+val Student2 = new Student("Robert", "Kwik")
+val Student3 = new Student("Bogdan", "Paw")
+val Student4 = new Student("Łukasz", "Pluta")
+val Student5 = new Student("Sztefan", "Wąs")
+val Student6 = new Student("Kamil", "Smar")
+
+def greetings( o: Student) = {
+  o match {
+    case Student("Alan", "Szpak") =>  "Siemaneczko!"
+    case Student("Robert", "Kwik") => "Witam i o zdrowie pytam"
+    case Student("Bogdan", "Paw") => "Czołem!"
+    case Student("Łukasz", "Pluta") => "Uszanowanko"
+    case Student("Sztefan", "Wąs") => "Wwwwwitam"
+    case _ => "Dzień dobry"
+
+  }
+}
+
+println(Student1 + ":" + greetings(Student1))
+println(Student2 + ":" + greetings(Student2))
+println(Student3 + ":" + greetings(Student3))
+println(Student4 + ":" + greetings(Student4))
+println(Student5 + ":" + greetings(Student5))
+println(Student6 + ":" + greetings(Student6))
+
+// zadanie 8
+println("zadanie 8")
+
+val list_zera = List(1.0, 2.0, 5.5, 4.6, 5.9, 0.0, 8.0, 0.0, 10.0, 18.0, 0.0, 0.0 ,9.0,10.1, 14.5,25.5)
+
+def eraseZeroValues(list: List[Double]) = list.filter(_ != 0)
+println(" Przykładowa lista : " + (list_zera))
+println(" Przykładowa list po usunięciu zer " + {eraseZeroValues(list_zera)})
+
+// zadanie 9
+println("zadanie 9")
+
+val list_1 = List(1.0, 2.0, 5.5, 4.6, 5.9, 0.0, 8.0, 0.0, 10.0, 18.0, 0.0, 0.0 ,9.0,10.1, 14.5,25.5)
+
+def list1PlusOne(list: List[Double]) = list.map(x => x + 1.0)
+println("Przykładowa lista : " + (list_1))
+println("Przykładowa lista zwiękoszona + 1 " + {list1PlusOne(list_1)})
+
+// zadanie 10
+
+println("zadanie 10")
+
+val list_2 = List(-10.0,-8.0,-6.0,-4.0,-2.0,0.0,1.0, 2.0, 5.5, 4.6, 5.9, 0.0, 8.0, 0.0, 10.0, 18.0, 0.0, 0.0 ,9.0,10.1, 14.5,25.5)
+def convertList(list : List[Double]): List[Double] = { list.filter( x => x > -5 && x < 12 ).map(_.abs)}
+
+println(" Przykładowa Lista " + (list_2) )
+println( " Przykładowa lista wartości bezwględnych mieszczących się w przedziale <-5;12>" + {convertList(list_2)} )
